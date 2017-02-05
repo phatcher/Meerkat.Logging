@@ -1,6 +1,6 @@
 /// FAKE Build script
 
-#r "packages/FAKE/tools/FakeLib.dll"
+#r "packages/build/FAKE/tools/FakeLib.dll"
 open Fake
 open Fake.AssemblyInfoFile
 open Fake.Git
@@ -54,7 +54,8 @@ Target "Build" (fun _ ->
 )
 
 Target "Test" (fun _ ->
-    !! (buildDir + "/*.Test.dll")
+    // Exclude the packge integrated version as it will find the wrong version in the build directory
+    !! (buildDir + "/Meerkat.Logging.Test.dll")
     |> NUnit (fun p ->
        {p with
           ToolPath = nunitPath

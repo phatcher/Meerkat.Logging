@@ -1,32 +1,33 @@
 ﻿using System.Reflection;
+using Meerkat.Logging;
 
-namespace Meerkat.Logging.Test
+namespace Meerkat.Test
 {
     public class SampleService
     {
         private static readonly ILog Logger = LogProvider.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void Debug()
+        public void LogDebug()
         {
             Logger.Debug("Debug");
         }
 
-        public void Info()
+        public void LogInfo()
         {
             Logger.Info("Info");
         }
 
-        public void Warning()
+        public void LogWarning()
         {
             Logger.Info("Warning");
         }
 
-        public void Error()
+        public void LogError()
         {
             Logger.Error("Error");
         }
 
-        public void Fatal()
+        public void LogFatal()
         {
             Logger.Fatal("Fatal");
         }

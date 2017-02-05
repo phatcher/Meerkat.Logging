@@ -1413,11 +1413,19 @@ namespace Meerkat.Logging.LogProviders
 #if !LIBLOG_PORTABLE
                         StackTrace stack = new StackTrace();
                         Type thisType = GetType();
+                        //Debug.WriteLine("We are in " + thisType.FullName);
+                        var prefix = LoggingNamespace(thisType);
                         s_callerStackBoundaryType = Type.GetType("LoggerExecutionWrapper");
                         for (var i = 1; i < stack.FrameCount; i++)
                         {
-                            if (!IsInTypeHierarchy(thisType, stack.GetFrame(i).GetMethod().DeclaringType))
+                            var frame = stack.GetFrame(i);
+                            var method = frame.GetMethod();
+                            var declType = method.DeclaringType;
+
+                            //Debug.WriteLine(i + ":" + declType + "." + method.Name);
+                            if (!IsInTypeHierarchy(thisType, declType) && (string.IsNullOrEmpty(prefix) || !declType.Namespace.StartsWith(prefix)))
                             {
+                                //Debug.WriteLine("Using " + frame.GetMethod().DeclaringType);
                                 s_callerStackBoundaryType = stack.GetFrame(i - 1).GetMethod().DeclaringType;
                                 break;
                             }
@@ -1437,6 +1445,20 @@ namespace Meerkat.Logging.LogProviders
                 _logDelegate(_logger, loggingEvent);
 
                 return true;
+            }
+
+            private string LoggingNamespace(Type type)
+            {
+                var ns = type.Namespace;
+                var posn = ns.IndexOf(".Logging");
+                int index = 0;
+                if (posn > -1)
+                {
+                    // Include the logging in the exclude
+                    return ns.Substring(0, posn + 8);
+                }
+
+                return string.Empty;
             }
 
             private void PopulateProperties(object loggingEvent, IEnumerable<string> patternMatches, object[] formatParameters)
