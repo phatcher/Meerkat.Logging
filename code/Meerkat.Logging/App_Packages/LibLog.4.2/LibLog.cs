@@ -3,7 +3,7 @@
 //
 // https://github.com/damianh/LibLog
 //===============================================================================
-// Copyright Â© 2011-2015 Damian Hickey.  All rights reserved.
+// Copyright © 2011-2015 Damian Hickey.  All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -121,6 +121,9 @@ namespace Meerkat.Logging
     }
 
 #if !LIBLOG_PROVIDERS_ONLY
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
 #if LIBLOG_PUBLIC
     public
 #else
@@ -177,7 +180,17 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Debug, message.AsFunc());
             }
         }
-
+        
+        public static void Debug(this ILog logger, string message, params object[] args)
+        {
+            logger.DebugFormat(message, args);
+        }
+        
+        public static void Debug(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.DebugException(message, exception, args);
+        }
+        
         public static void DebugFormat(this ILog logger, string message, params object[] args)
         {
             if (logger.IsDebugEnabled())
@@ -215,6 +228,16 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Error, message.AsFunc());
             }
         }
+        
+        public static void Error(this ILog logger, string message, params object[] args)
+        {
+            logger.ErrorFormat(message, args);
+        }
+        
+        public static void Error(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.ErrorException(message, exception, args);
+        }
 
         public static void ErrorFormat(this ILog logger, string message, params object[] args)
         {
@@ -244,7 +267,17 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Fatal, message.AsFunc());
             }
         }
-
+        
+        public static void Fatal(this ILog logger, string message, params object[] args)
+        {
+            logger.FatalFormat(message, args);
+        }
+        
+        public static void Fatal(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.FatalException(message, exception, args);
+        }
+        
         public static void FatalFormat(this ILog logger, string message, params object[] args)
         {
             if (logger.IsFatalEnabled())
@@ -274,7 +307,17 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Info, message.AsFunc());
             }
         }
+        
+        public static void Info(this ILog logger, string message, params object[] args)
+        {
+            logger.InfoFormat(message, args);
+        }
 
+        public static void Info(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.InfoException(message, exception, args);
+        }
+        
         public static void InfoFormat(this ILog logger, string message, params object[] args)
         {
             if (logger.IsInfoEnabled())
@@ -304,7 +347,17 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Trace, message.AsFunc());
             }
         }
-
+        
+        public static void Trace(this ILog logger, string message, params object[] args)
+        {
+            logger.TraceFormat(message, args);
+        }
+        
+        public static void Trace(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.TraceException(message, exception, args);
+        }
+        
         public static void TraceFormat(this ILog logger, string message, params object[] args)
         {
             if (logger.IsTraceEnabled())
@@ -334,7 +387,17 @@ namespace Meerkat.Logging
                 logger.Log(LogLevel.Warn, message.AsFunc());
             }
         }
-
+        
+        public static void Warn(this ILog logger, string message, params object[] args)
+        {
+            logger.WarnFormat(message, args);
+        }
+        
+        public static void Warn(this ILog logger, Exception exception, string message, params object[] args)
+        {
+            logger.WarnException(message, exception, args);
+        }
+        
         public static void WarnFormat(this ILog logger, string message, params object[] args)
         {
             if (logger.IsWarnEnabled())
@@ -414,6 +477,9 @@ namespace Meerkat.Logging
     /// <summary>
     /// Provides a mechanism to create instances of <see cref="ILog" /> objects.
     /// </summary>
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
 #if LIBLOG_PROVIDERS_ONLY
     internal
 #else
@@ -653,6 +719,9 @@ namespace Meerkat.Logging
         }
 
 #if !LIBLOG_PROVIDERS_ONLY
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class NoOpLogger : ILog
         {
             internal static readonly NoOpLogger Instance = new NoOpLogger();
@@ -666,6 +735,9 @@ namespace Meerkat.Logging
     }
 
 #if !LIBLOG_PROVIDERS_ONLY
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class LoggerExecutionWrapper : ILog
     {
         private readonly Logger _logger;
@@ -734,6 +806,9 @@ namespace Meerkat.Logging.LogProviders
 #endif
     using System.Text.RegularExpressions;
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal abstract class LogProviderBase : ILogProvider
     {
         protected delegate IDisposable OpenNdc(string message);
@@ -774,6 +849,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class NLogLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -855,6 +933,9 @@ namespace Meerkat.Logging.LogProviders
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
         }
 
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class NLogLogger
         {
             private readonly dynamic _logger;
@@ -1117,6 +1198,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class Log4NetLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -1225,6 +1309,9 @@ namespace Meerkat.Logging.LogProviders
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
         }
 
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class Log4NetLogger
         {
             private readonly dynamic _logger;
@@ -1514,6 +1601,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class EntLibLogProvider : LogProviderBase
     {
         private const string TypeTemplate = "Microsoft.Practices.EnterpriseLibrary.Logging.{0}, Microsoft.Practices.EnterpriseLibrary.Logging";
@@ -1630,6 +1720,9 @@ namespace Meerkat.Logging.LogProviders
             return memberInit;
         }
 
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class EntLibLogger
         {
             private readonly string _loggerName;
@@ -1688,6 +1781,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class SerilogLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -1783,6 +1879,9 @@ namespace Meerkat.Logging.LogProviders
             return name => func("SourceContext", name, false);
         }
 
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class SerilogLogger
         {
             private readonly object _logger;
@@ -1933,6 +2032,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class LoupeLogProvider : LogProviderBase
     {
         /// <summary>
@@ -2007,6 +2109,9 @@ namespace Meerkat.Logging.LogProviders
             return callDelegate;
         }
 
+#if !LIBLOG_PORTABLE
+        [ExcludeFromCodeCoverage]
+#endif
         internal class LoupeLogger
         {
             private const string LogSystem = "LibLog";
@@ -2065,6 +2170,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal static class TraceEventTypeValues
     {
         internal static readonly Type Type;
@@ -2092,6 +2200,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal static class LogMessageFormatter
     {
         //private static readonly Regex Pattern = new Regex(@"\{@?\w{1,}\}");
@@ -2176,6 +2287,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal static class TypeExtensions
     {
         internal static ConstructorInfo GetConstructorPortable(this Type type, params Type[] types)
@@ -2265,6 +2379,9 @@ namespace Meerkat.Logging.LogProviders
         }
     }
 
+#if !LIBLOG_PORTABLE
+    [ExcludeFromCodeCoverage]
+#endif
     internal class DisposableAction : IDisposable
     {
         private readonly Action _onDispose;
