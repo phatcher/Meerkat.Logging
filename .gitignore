@@ -9,6 +9,7 @@
 
 
 # Build results
+.vs/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -18,7 +19,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 .sonarqube/
-
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -70,6 +70,7 @@ _Chutzpah*
 ipch/
 *.aps
 *.ncb
+*.opendb
 *.opensdf
 *.sdf
 *.cachefile
@@ -145,8 +146,12 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
-# Paket
+# Build tools/artifacts
+.fake/
 .paket/paket.exe
+paket.restore.targets
+packages/
+paket-files/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
@@ -181,8 +186,6 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
-tools/
-.fake/
 
 
 # RIA/Silverlight projects
@@ -228,5 +231,3 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-/code/Meerkat.Caching/App_Packages/
-/packages/build
