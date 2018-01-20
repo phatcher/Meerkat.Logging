@@ -4,15 +4,13 @@
 open Fake
 open Fake.AssemblyInfoFile
 open Fake.Git
-open Fake.NuGetHelper
 open Fake.ReleaseNotesHelper
 open Fake.Testing.NUnit3
 
 // Version info
-let projectName = "Meerkat.Logging"
-let projectSummary = ""
-let projectDescription = "Simple logging framework for use internally withing the Meerkat libraries"
+let projectName = "Meerkat Logging"
 let authors = ["Paul Hatcher"]
+let copyright = "Copyright © 2016 Paul Hatcher"
 
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 
@@ -42,7 +40,9 @@ Target "SetVersion" (fun _ ->
             | ex -> printfn "Exception! (%s)" (ex.Message); ""
     let infoVersion = String.concat " " [release.AssemblyVersion; commitHash]
     CreateCSharpAssemblyInfo "./code/SolutionInfo.cs"
-        [Attribute.Version release.AssemblyVersion
+        [Attribute.Product projectName
+         Attribute.Copyright copyright
+         Attribute.Version release.AssemblyVersion
          Attribute.FileVersion release.AssemblyVersion
          Attribute.InformationalVersion infoVersion]
 )
@@ -53,6 +53,7 @@ Target "Build" (fun _ ->
         [
             "Configuration", "Release"
             "Platform", "Any CPU"
+            "Authors", authors |> String.concat ", "
             "PackageVersion", release.AssemblyVersion
             "PackageReleaseNotes", release.Notes |> toLines
             "IncludeSymbols", "true"

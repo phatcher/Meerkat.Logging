@@ -7,15 +7,23 @@
     <RootNamespace>Meerkat</RootNamespace>
     <Description>Simple logging framework for use internally withing the Meerkat libraries</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Meerkat.Logging</PackageId>
+    <Title>Meerkat Logging</Title>
+    <Copyright>Copyright © 2016 Paul Hatcher</Copyright>
     <PackageLicenseUrl>http://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
-    <PackageTags>logging</PackageTags>
+    <PackageProjectUrl>https://github.com/phatcher/Meerkat.Logging</PackageProjectUrl>
+    <PackageRequireLicenceAcceptance>False</PackageRequireLicenceAcceptance>
+    <PackageTags>logging liblog</PackageTags>
+    <RepositoryUrl>https://github.com/phatcher/Meerkat.Logging</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <Authors>Paul Hatcher</Authors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NET45;LIBLOG_PUBLIC</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;LIBLOG_PUBLIC</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;RELEASE;NET45;LIBLOG_PUBLIC</DefineConstants>
+    <DefineConstants>TRACE;LIBLOG_PUBLIC</DefineConstants>
+    <DocumentationFile>bin\Release\net45\Meerkat.Logging.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
