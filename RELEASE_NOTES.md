@@ -1,3 +1,7 @@
+#### 2.0.0 (2018-01-23)
+* Target net45 and netstandard1.3
+* Updated to latest LibLog code
+
 #### 1.0.2 (2017-02-04)
 * Fixed incorrect class and method parameter values when used with log4net
 
