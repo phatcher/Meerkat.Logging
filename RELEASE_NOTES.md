@@ -1,5 +1,5 @@
-#### 2.0.0 (2018-01-23)
-* Target net45 and netstandard1.3
+#### 2.0.0 (2018-04-01)
+* Target net45 and netstandard2.0
 * Updated to latest LibLog code
 
 #### 1.0.2 (2017-02-04)

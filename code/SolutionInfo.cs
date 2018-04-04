@@ -5,13 +5,13 @@ using System.Reflection;
 [assembly: AssemblyCopyrightAttribute("Copyright © 2016 Paul Hatcher")]
 [assembly: AssemblyVersionAttribute("2.0.0")]
 [assembly: AssemblyFileVersionAttribute("2.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("2.0.0 ")]
+[assembly: AssemblyInformationalVersionAttribute("2.0.0 9a3267")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyProduct = "Meerkat Logging";
         internal const System.String AssemblyCopyright = "Copyright © 2016 Paul Hatcher";
         internal const System.String AssemblyVersion = "2.0.0";
         internal const System.String AssemblyFileVersion = "2.0.0";
-        internal const System.String AssemblyInformationalVersion = "2.0.0 ";
+        internal const System.String AssemblyInformationalVersion = "2.0.0 9a3267";
     }
 }

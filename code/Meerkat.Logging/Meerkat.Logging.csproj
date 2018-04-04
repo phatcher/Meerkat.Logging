@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>Meerkat</RootNamespace>
-    <Description>Simple logging framework for use internally withing the Meerkat libraries</Description>
+    <Description>Simple logging framework for use internally within the Meerkat libraries</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Meerkat.Logging</PackageId>
     <Title>Meerkat Logging</Title>
@@ -19,6 +19,9 @@
     <Authors>Paul Hatcher</Authors>
 	<OutputPath>$(SolutionDir)/build/$(Configuration)/$(AssemblyName)/$(TargetFramework)/</OutputPath>
 	<OutDir>$(OutputPath)</OutDir>
+	<SignAssembly>true</SignAssembly>
+	<AssemblyOriginatorKeyFile>..\..\Meekat.Logging.snk</AssemblyOriginatorKeyFile>
+	<DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;LIBLOG_PUBLIC</DefineConstants>
@@ -29,6 +32,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\SolutionInfo.cs" Link="Properties\SolutionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Meekat.Logging.snk" Link="Properties\Meekat.Logging.snk" />
   </ItemGroup>
   <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
