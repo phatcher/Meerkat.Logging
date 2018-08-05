@@ -20,6 +20,13 @@ namespace Meerkat.Test
         }
 
         [Test]
+        public void Trace()
+        {
+            var service = new SampleService();
+            service.LogTrace();
+        }
+
+        [Test]
         public void Warning()
         {
             var service = new SampleService();

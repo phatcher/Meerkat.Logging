@@ -1,3 +1,6 @@
+#### 2.1.0 (2018-08-05)
+* Update to LibLog 5.0.2
+
 #### 2.0.0 (2018-04-01)
 * Target net45 and netstandard2.0
 * Updated to latest LibLog code

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -14,6 +15,13 @@ namespace Meerkat.Test
         [OneTimeSetUp]
         public void Initialize()
         {
+            //var dir = Path.GetDirectoryName(typeof(LoggingTest).Assembly.Location);
+            //Environment.CurrentDirectory = dir;
+
+            //// or
+            //Directory.SetCurrentDirectory(dir);
+
+
 #if NETCOREAPP2_0
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo("logger.config"));

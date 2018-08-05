@@ -17,9 +17,14 @@ namespace Meerkat.Test
             Logger.Info("Info");
         }
 
+        public void LogTrace()
+        {
+            Logger.Trace("Trace");
+        }
+
         public void LogWarning()
         {
-            Logger.Info("Warning");
+            Logger.Warn("Warning");
         }
 
         public void LogError()
