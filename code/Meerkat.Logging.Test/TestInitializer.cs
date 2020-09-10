@@ -22,7 +22,7 @@ namespace Meerkat.Test
             //Directory.SetCurrentDirectory(dir);
 
 
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             log4net.Config.XmlConfigurator.Configure(logRepository, new FileInfo("logger.config"));
             if (logRepository.Configured)

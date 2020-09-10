@@ -1,3 +1,7 @@
+#### 2.3.0 (2020-09-06)
+* Update to LibLog 5.0.8
+* Add LibraryLoggger static class for netstandard2.0 to hold ILoggerFactory
+
 #### 2.2.1 (2018-09-03)
 * Tidy up package dependencies
 

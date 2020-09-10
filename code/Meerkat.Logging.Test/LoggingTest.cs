@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Meerkat.Logging;
+
+using NUnit.Framework;
 
 namespace Meerkat.Test
 {
@@ -46,5 +48,14 @@ namespace Meerkat.Test
             var service = new SampleService();
             service.LogFatal();
         }
+
+#if NETCOREAPP
+        [SetUp]
+        public void Setup()
+        {
+            var factory = new Microsoft.Extensions.Logging.LoggerFactory();
+            LibraryLogger.Factory = factory;
+        }
+#endif
     }
 }

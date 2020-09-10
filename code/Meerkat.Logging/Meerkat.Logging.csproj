@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net462;net471;net472;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;net472;net48;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -10,24 +10,30 @@
     <PackageId>Meerkat.Logging</PackageId>
     <Title>Meerkat Logging</Title>
     <Copyright>Copyright © 2016 Paul Hatcher</Copyright>
-    <PackageLicenseUrl>http://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/phatcher/Meerkat.Logging</PackageProjectUrl>
     <PackageRequireLicenceAcceptance>False</PackageRequireLicenceAcceptance>
     <PackageTags>logging liblog</PackageTags>
     <RepositoryUrl>https://github.com/phatcher/Meerkat.Logging</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Authors>Paul Hatcher</Authors>
-	<OutputPath>$(SolutionDir)/build/$(Configuration)/$(AssemblyName)/$(TargetFramework)/</OutputPath>
-	<OutDir>$(OutputPath)</OutDir>
-	<SignAssembly>true</SignAssembly>
-	<AssemblyOriginatorKeyFile>..\..\Meekat.Logging.snk</AssemblyOriginatorKeyFile>
-	<DelaySign>false</DelaySign>
+    <OutputPath>$(SolutionDir)/build/$(Configuration)/$(AssemblyName)/$(TargetFramework)/</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Meekat.Logging.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
-     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="LibLog" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="Serilog" Version="2.9.0" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
   </ItemGroup>
   <ItemGroup>
-     <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)' != 'netstandard2.0'" />
+    <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)' != 'netstandard2.0'" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;LIBLOG_PUBLIC</DefineConstants>
